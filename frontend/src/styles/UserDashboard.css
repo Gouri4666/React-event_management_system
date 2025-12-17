@@ -1,0 +1,196 @@
+/* =========================
+   HEADER
+========================= */
+.user-header {
+  height: 60px;
+  background: #e08113;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 35px;
+}
+
+.user-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.user-header button {
+  background: white;
+  color: #e08113;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* =========================
+   BODY
+========================= */
+.user-container {
+  padding: 40px 30px;
+  text-align: center;
+  background: #f8fafc;
+  min-height: calc(100vh - 60px);
+}
+
+.welcome-text {
+  font-size: 36px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  color: #555;
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+/* =========================
+   BOOK NOW BUTTON
+========================= */
+.book-now-btn {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+  border: none;
+  padding: 14px 44px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(46, 204, 113, 0.35);
+  margin-bottom: 45px;
+  transition: 0.3s ease;
+}
+
+.book-now-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(46, 204, 113, 0.45);
+}
+
+/* =========================
+   CARDS LAYOUT
+========================= */
+.cards {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 300px;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  text-align: left;
+  position: relative;
+}
+
+/* =========================
+   LEFT COLOR STRIP
+========================= */
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15px;
+  bottom: 15px;
+  width: 6px;
+  border-radius: 10px;
+}
+
+.card.live::before {
+  background: #2ecc71;
+}
+
+.card.ended::before {
+  background: #e74c3c;
+}
+
+.card.profile::before {
+  background: #3498db;
+}
+
+/* =========================
+   LIVE EVENTS (ALL GREEN)
+========================= */
+.card.live {
+  background: #eafff2;
+  color: #1e8e3e;
+}
+
+.card.live h3,
+.card.live p,
+.card.live strong,
+.card.live .event-title,
+.card.live .event-sub {
+  color: #1e8e3e;
+}
+
+/* =========================
+   ENDED EVENTS (ALL RED)
+========================= */
+.card.ended {
+  background: #ffecec;
+  color: #c0392b;
+}
+
+.card.ended h3,
+.card.ended p,
+.card.ended strong,
+.card.ended .event-title,
+.card.ended .event-sub {
+  color: #c0392b;
+}
+
+/* =========================
+   PROFILE (ALL BLUE)
+========================= */
+.card.profile {
+  background: #eef5ff;
+  color: #1f4fd8;
+}
+
+.card.profile h3,
+.card.profile p,
+.card.profile strong {
+  color: #1f4fd8;
+}
+
+/* =========================
+   CARD TITLES
+========================= */
+.card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+/* =========================
+   EVENT ITEMS
+========================= */
+.event-item {
+  margin-bottom: 14px;
+}
+
+.event-title {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.event-sub {
+  font-size: 13px;
+}
+
+/* =========================
+   MUTED TEXT (EMPTY STATE)
+========================= */
+.muted {
+  font-size: 14px;
+  opacity: 0.75;
+}

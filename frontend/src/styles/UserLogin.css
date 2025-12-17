@@ -1,0 +1,209 @@
+/* =========================
+   RESET & BASE
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+}
+
+/* =========================
+   HEADER (USED EVERYWHERE)
+========================= */
+.header {
+  width: 100%;
+  height: 60px;
+  background-color: #e67e22;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* =========================
+   ADMIN LOGIN (SIMPLE)
+========================= */
+.login-container {
+  width: 100%;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 360px;
+  background: white;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+  text-align: center;
+}
+
+.login-card h2 {
+  margin-bottom: 20px;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #ffffff;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  background: #e67e22;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-card button:hover {
+  background: #cf6d17;
+}
+
+/* =========================
+   USER LOGIN / REGISTER
+========================= */
+.admin-auth-container {
+  width: 100%;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5;
+}
+
+.single-card {
+  width: 380px;
+  height: 400px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+  overflow: hidden;
+  position: relative;
+}
+
+/* CARD CONTENT */
+.card-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 38px 34px;
+  text-align: center;
+  animation-duration: 0.45s;
+  animation-fill-mode: both;
+}
+
+.card-content h2 {
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.card-content input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #d19f49;
+}
+
+.card-content input:focus {
+  outline: none;
+  border-color: #e67e22;
+  box-shadow: 0 0 0 2px rgba(230,126,34,0.25);
+}
+
+/* BUTTONS */
+.btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-btn,
+.register-btn {
+  background: #e67e22;
+}
+
+.login-btn:hover,
+.register-btn:hover {
+  background: #cf6d17;
+}
+
+/* SWITCH LINK */
+.arrow {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #b33d0f;
+  cursor: pointer;
+}
+
+.arrow:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+.slide-in-right {
+  animation-name: slideInRight;
+}
+
+.slide-in-left {
+  animation-name: slideInLeft;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
