@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import "../styles/AdminDashboard.css";
+import { useNavigate } from "react-router-dom";
+
 
 export default function AdminDashboard() {
+   const navigate = useNavigate(); 
   const [showModal, setShowModal] = useState(false);
   const [events, setEvents] = useState([]);
 
@@ -66,7 +69,12 @@ export default function AdminDashboard() {
       alert("Failed to create event ");
     }
   };
-
+   /* 🚪 LOGOUT FUNCTION (THIS WAS MISSING) */
+  const handleLogout = () => {
+    localStorage.removeItem("admin");
+    localStorage.removeItem("adminLoggedIn");
+    navigate("/admin/login");
+  };
   return (
     <>
       {/* HEADER */}
@@ -76,7 +84,7 @@ export default function AdminDashboard() {
           <button className="header-btn" onClick={() => setShowModal(true)}>
             Create Event
           </button>
-          <button className="header-btn logout">Logout</button>
+          <button className="header-btn logout" onClick={handleLogout}>Logout</button>
         </nav>
       </header>
 
