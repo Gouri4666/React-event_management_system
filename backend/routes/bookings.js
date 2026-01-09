@@ -5,9 +5,16 @@ const db = require("../db");
 /* ================= CREATE BOOKING ================= */
 router.post("/create", (req, res) => {
   const { event_id, user_name, email, phone } = req.body;
-
+  // 🔴 Required fields check
   if (!event_id || !user_name || !email || !phone) {
     return res.status(400).json({ message: "Missing fields" });
+  }
+
+  // 🔴 PHONE VALIDATION (THIS WAS MISSING)
+  if (!/^[0-9]{10}$/.test(phone)) {
+    return res.status(400).json({
+      message: "Phone number must be exactly 10 digits"
+    });
   }
 
   // Check seats

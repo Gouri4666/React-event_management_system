@@ -61,22 +61,22 @@ db.connect((err) => {
 
   /* ================= BOOKINGS TABLE ================= */
   db.query(`
-    CREATE TABLE IF NOT EXISTS bookings (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      event_id INT NOT NULL,
-      event_name VARCHAR(100) NOT NULL,
-      user_name VARCHAR(100) NOT NULL,
-      email VARCHAR(100) NOT NULL,
-      phone VARCHAR(15) NOT NULL,
-      status VARCHAR(20) DEFAULT 'Booked',
-      booked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (event_id) REFERENCES events(id)
-        ON DELETE CASCADE
-    )
-  `, (err) => {
-    if (err) console.error("❌ Bookings table error:", err.message);
-    else console.log("✅ Bookings table ready");
-  });
+  CREATE TABLE IF NOT EXISTS bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    event_id INT NOT NULL,
+    event_name VARCHAR(100) NOT NULL,
+    user_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone CHAR(10) NOT NULL,
+    status VARCHAR(20) DEFAULT 'Booked',
+    booked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (event_id) REFERENCES events(id)
+      ON DELETE CASCADE
+  )
+`, (err) => {
+  if (err) console.error("❌ Bookings table error:", err.message);
+  else console.log("✅ Bookings table ready");
+});
 });
 
 module.exports = db;
