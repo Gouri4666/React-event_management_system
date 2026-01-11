@@ -10,11 +10,11 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) {
-    console.error("❌ MySQL connection failed:", err.message);
+    console.error(" MySQL connection failed:", err.message);
     return;
   }
 
-  console.log("✅ MySQL connected successfully");
+  console.log(" MySQL connected successfully");
 
   /* ================= ADMINS TABLE ================= */
   db.query(`
@@ -23,8 +23,8 @@ db.connect((err) => {
       password VARCHAR(255) NOT NULL
     )
   `, (err) => {
-    if (err) console.error("❌ Admins table error:", err.message);
-    else console.log("✅ Admins table ready");
+    if (err) console.error(" Admins table error:", err.message);
+    else console.log(" Admins table ready");
   });
 
   /* ================= USERS TABLE ================= */
@@ -36,8 +36,8 @@ db.connect((err) => {
       password VARCHAR(255) NOT NULL
     )
   `, (err) => {
-    if (err) console.error("❌ Users table error:", err.message);
-    else console.log("✅ Users table ready");
+    if (err) console.error(" Users table error:", err.message);
+    else console.log(" Users table ready");
   });
 
   /* ================= EVENTS TABLE ================= */
@@ -55,8 +55,8 @@ db.connect((err) => {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `, (err) => {
-    if (err) console.error("❌ Events table error:", err.message);
-    else console.log("✅ Events table ready");
+    if (err) console.error(" Events table error:", err.message);
+    else console.log("Events table ready");
   });
 
   /* ================= BOOKINGS TABLE ================= */
@@ -72,10 +72,10 @@ db.connect((err) => {
     booked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (event_id) REFERENCES events(id)
       ON DELETE CASCADE
-  )
+  )AUTO_INCREMENT=10000
 `, (err) => {
-  if (err) console.error("❌ Bookings table error:", err.message);
-  else console.log("✅ Bookings table ready");
+  if (err) console.error(" Bookings table error:", err.message);
+  else console.log(" Bookings table ready");
 });
 });
 

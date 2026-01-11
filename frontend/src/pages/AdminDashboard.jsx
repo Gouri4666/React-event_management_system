@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import "../styles/AdminDashboard.css";
 import { useNavigate } from "react-router-dom";
 
-
 export default function AdminDashboard() {
-   const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [events, setEvents] = useState([]);
 
@@ -17,6 +16,16 @@ export default function AdminDashboard() {
     venue: "",
     coordinator_number: "",
   });
+
+  /* 🔹 DATE FORMATTER */
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    return new Date(dateString).toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
 
   /* FETCH EVENTS */
   const fetchEvents = () => {
@@ -66,15 +75,17 @@ export default function AdminDashboard() {
         coordinator_number: "",
       });
     } else {
-      alert("Failed to create event ");
+      alert("Failed to create event ❌");
     }
   };
-   /* 🚪 LOGOUT FUNCTION (THIS WAS MISSING) */
+
+  /* 🚪 LOGOUT */
   const handleLogout = () => {
     localStorage.removeItem("admin");
     localStorage.removeItem("adminLoggedIn");
     navigate("/admin/login");
   };
+
   return (
     <>
       {/* HEADER */}
@@ -84,7 +95,9 @@ export default function AdminDashboard() {
           <button className="header-btn" onClick={() => setShowModal(true)}>
             Create Event
           </button>
-          <button className="header-btn logout" onClick={handleLogout}>Logout</button>
+          <button className="header-btn logout" onClick={handleLogout}>
+            Logout
+          </button>
         </nav>
       </header>
 
@@ -103,7 +116,7 @@ export default function AdminDashboard() {
                     : "live-text"
                 }
               >
-                {e.event_name} – {new Date(e.event_date).toDateString()}
+                {e.event_name} – {formatDate(e.event_date)}
               </span>
             </div>
           ))}
@@ -130,8 +143,8 @@ export default function AdminDashboard() {
                 .map((e) => (
                   <tr key={e.id}>
                     <td>{e.event_name}</td>
-                    <td>{e.event_date}</td>
-                    <td>{e.registration_ends}</td>
+                    <td>{formatDate(e.event_date)}</td>
+                    <td>{formatDate(e.registration_ends)}</td>
                     <td>{e.max_seats}</td>
                     <td className="seat-highlight">{e.available_seats}</td>
                     <td>{e.venue}</td>
@@ -153,20 +166,60 @@ export default function AdminDashboard() {
             <h2>Create New Event</h2>
 
             <form className="event-form">
-              <input name="event_name" placeholder="Event Name" value={eventData.event_name} onChange={handleChange} />
-              <input name="event_type" placeholder="Event Type" value={eventData.event_type} onChange={handleChange} />
+              <input
+                name="event_name"
+                placeholder="Event Name"
+                value={eventData.event_name}
+                onChange={handleChange}
+              />
+              <input
+                name="event_type"
+                placeholder="Event Type"
+                value={eventData.event_type}
+                onChange={handleChange}
+              />
 
               <label className="date-label">Event Date</label>
-              <input type="date" name="event_date" value={eventData.event_date} onChange={handleChange} />
+              <input
+                type="date"
+                name="event_date"
+                value={eventData.event_date}
+                onChange={handleChange}
+              />
 
               <label className="date-label">Registration Ends On</label>
-              <input type="date" name="registration_ends" value={eventData.registration_ends} onChange={handleChange} />
+              <input
+                type="date"
+                name="registration_ends"
+                value={eventData.registration_ends}
+                onChange={handleChange}
+              />
 
-              <input type="number" name="max_seats" placeholder="Maximum Seats" value={eventData.max_seats} onChange={handleChange} />
-              <input name="venue" placeholder="Venue" value={eventData.venue} onChange={handleChange} />
-              <input name="coordinator_number" placeholder="Coordinator Number" value={eventData.coordinator_number} onChange={handleChange} />
+              <input
+                type="number"
+                name="max_seats"
+                placeholder="Maximum Seats"
+                value={eventData.max_seats}
+                onChange={handleChange}
+              />
+              <input
+                name="venue"
+                placeholder="Venue"
+                value={eventData.venue}
+                onChange={handleChange}
+              />
+              <input
+                name="coordinator_number"
+                placeholder="Coordinator Number"
+                value={eventData.coordinator_number}
+                onChange={handleChange}
+              />
 
-              <button type="button" className="submit-btn" onClick={handleCreateEvent}>
+              <button
+                type="button"
+                className="submit-btn"
+                onClick={handleCreateEvent}
+              >
                 Create Event
               </button>
             </form>
