@@ -17,6 +17,16 @@ export default function UserDashboard() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [phone, setPhone] = useState("");
 
+  /* 🔹 DATE FORMATTER */
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    return new Date(dateString).toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
   // 🔒 Protect page
   useEffect(() => {
     if (!userEmail) {
@@ -80,7 +90,7 @@ export default function UserDashboard() {
         setPhone("");
         setSelectedEvent(null);
         setSelectedEventId("");
-        fetchEvents(); // refresh seats
+        fetchEvents();
       } else {
         alert(data.message || "Booking failed ❌");
       }
@@ -124,7 +134,7 @@ export default function UserDashboard() {
               <div key={e.id} className="event-item">
                 <p className="event-title">{e.event_name}</p>
                 <p className="event-sub">
-                  Registration ends on {e.registration_ends}
+                  Registration ends on {formatDate(e.registration_ends)}
                 </p>
               </div>
             ))}
@@ -142,7 +152,7 @@ export default function UserDashboard() {
               <div key={e.id} className="event-item">
                 <p className="event-title">{e.event_name}</p>
                 <p className="event-sub">
-                  Registration ended on {e.registration_ends}
+                  Registration ended on {formatDate(e.registration_ends)}
                 </p>
               </div>
             ))}
@@ -197,11 +207,7 @@ export default function UserDashboard() {
               onChange={(e) => setPhone(e.target.value)}
             />
 
-            <input
-              type="email"
-              value={userEmail}
-              disabled
-            />
+            <input type="email" value={userEmail} disabled />
 
             <button className="confirm-btn" onClick={handleBooking}>
               Book Now
