@@ -56,5 +56,31 @@ router.post("/create", (req, res) => {
     }
   );
 });
+/* ================= GET USER BOOKINGS ================= */
+router.get("/user/:email", (req, res) => {
+  const { email } = req.params;
+
+  const query = `
+    SELECT 
+      b.id,
+      b.event_name,
+      b.phone,
+      b.status,
+      b.booked_at,
+      e.event_date,
+      e.venue
+    FROM bookings b
+    JOIN events e ON b.event_id = e.id
+    WHERE b.email = ?
+    ORDER BY b.booked_at DESC
+  `;
+
+  db.query(query, [email], (err, result) => {
+    if (err) {
+      return res.status(500).json({ message: "Failed to fetch bookings" });
+    }
+    res.status(200).json(result);
+  });
+});
 
 module.exports = router;

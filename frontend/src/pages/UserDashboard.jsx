@@ -10,6 +10,7 @@ export default function UserDashboard() {
 
   const [liveEvents, setLiveEvents] = useState([]);
   const [endedEvents, setEndedEvents] = useState([]);
+  const [myBookings, setMyBookings] = useState([]);
 
   // 🔹 Booking modal state
   const [showBooking, setShowBooking] = useState(false);
@@ -54,8 +55,16 @@ export default function UserDashboard() {
       });
   };
 
+  // 📥 Fetch user bookings
+  const fetchMyBookings = () => {
+    fetch(`http://localhost:5000/api/bookings/user/${userEmail}`)
+      .then((res) => res.json())
+      .then((data) => setMyBookings(data));
+  };
+
   useEffect(() => {
     fetchEvents();
+    fetchMyBookings();
   }, []);
 
   const handleLogout = () => {
@@ -91,6 +100,7 @@ export default function UserDashboard() {
         setSelectedEvent(null);
         setSelectedEventId("");
         fetchEvents();
+        fetchMyBookings();
       } else {
         alert(data.message || "Booking failed ❌");
       }
@@ -110,12 +120,8 @@ export default function UserDashboard() {
       {/* BODY */}
       <div className="user-container">
         <h1 className="welcome-text">Welcome, {userName}</h1>
-        <p className="subtitle">Book your seats now. Click here</p>
 
-        <button
-          className="book-now-btn"
-          onClick={() => setShowBooking(true)}
-        >
+        <button className="book-now-btn" onClick={() => setShowBooking(true)}>
           Book Now
         </button>
 
@@ -125,11 +131,7 @@ export default function UserDashboard() {
           {/* LIVE EVENTS */}
           <div className="card live">
             <h3>Live Events</h3>
-
-            {liveEvents.length === 0 && (
-              <p className="muted">No live events</p>
-            )}
-
+            {liveEvents.length === 0 && <p className="muted">No live events</p>}
             {liveEvents.map((e) => (
               <div key={e.id} className="event-item">
                 <p className="event-title">{e.event_name}</p>
@@ -143,11 +145,7 @@ export default function UserDashboard() {
           {/* ENDED EVENTS */}
           <div className="card ended">
             <h3>Ended Events</h3>
-
-            {endedEvents.length === 0 && (
-              <p className="muted">No ended events</p>
-            )}
-
+            {endedEvents.length === 0 && <p className="muted">No ended events</p>}
             {endedEvents.map((e) => (
               <div key={e.id} className="event-item">
                 <p className="event-title">{e.event_name}</p>
@@ -165,6 +163,40 @@ export default function UserDashboard() {
             <p><strong>Email:</strong> {userEmail}</p>
           </div>
         </div>
+
+        {/* ================= MY BOOKINGS ================= */}
+        <h2 className="section-heading">My Bookings</h2>
+
+        <div className="table-wrapper">
+          {myBookings.length === 0 ? (
+            <p className="muted">You have no bookings yet</p>
+          ) : (
+            <table className="event-table">
+              <thead>
+                <tr>
+                  <th>Booking ID</th>
+                  <th>Event Name</th>
+                  <th>Event Date</th>
+                  <th>Venue</th>
+                  <th>Status</th>
+                  <th>Booked On</th>
+                </tr>
+              </thead>
+              <tbody>
+                {myBookings.map((b) => (
+                  <tr key={b.id}>
+                    <td>{b.id}</td>
+                    <td>{b.event_name}</td>
+                    <td>{formatDate(b.event_date)}</td>
+                    <td>{b.venue}</td>
+                    <td>{b.status}</td>
+                    <td>{formatDate(b.booked_at)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
       </div>
 
       {/* ================= BOOKING MODAL ================= */}
@@ -179,10 +211,9 @@ export default function UserDashboard() {
               onChange={(e) => {
                 const id = e.target.value;
                 setSelectedEventId(id);
-                const ev = liveEvents.find(
-                  (event) => event.id === Number(id)
+                setSelectedEvent(
+                  liveEvents.find((event) => event.id === Number(id))
                 );
-                setSelectedEvent(ev);
               }}
             >
               <option value="">-- Select Event --</option>
@@ -213,10 +244,7 @@ export default function UserDashboard() {
               Book Now
             </button>
 
-            <button
-              className="cancel-btn"
-              onClick={() => setShowBooking(false)}
-            >
+            <button className="cancel-btn" onClick={() => setShowBooking(false)}>
               Cancel
             </button>
           </div>

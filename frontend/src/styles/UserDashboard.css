@@ -1,27 +1,39 @@
 /* =========================
+   RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+/* =========================
    HEADER
 ========================= */
 .user-header {
-  height: 60px;
-  background: #e08113;
-  color: white;
+  height: 64px;
+  background: #f97316; /* classy orange */
+  color: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 35px;
+  padding: 0 40px;
 }
 
 .user-header h2 {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 .user-header button {
-  background: white;
-  color: #e08113;
+  background: #ffffff;
+  color: #f97316;
   border: none;
   padding: 8px 18px;
-  border-radius: 20px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
 }
@@ -30,167 +42,209 @@
    BODY
 ========================= */
 .user-container {
-  padding: 40px 30px;
-  text-align: center;
-  background: #f8fafc;
-  min-height: calc(100vh - 60px);
+  background: #f9fafb;
+  min-height: calc(100vh - 64px);
+  padding: 50px 40px 80px;
 }
 
+/* =========================
+   WELCOME
+========================= */
 .welcome-text {
-  font-size: 36px;
-  font-weight: 700;
-  color: #111;
+  font-size: 32px;
+  font-weight: 600;
+  color: #111827;
+  text-align: center;
   margin-bottom: 6px;
 }
 
 .subtitle {
-  color: #555;
+  text-align: center;
   font-size: 15px;
-  margin-bottom: 18px;
+  color: #6b7280;
+  margin-bottom: 28px;
 }
 
 /* =========================
    BOOK NOW BUTTON
 ========================= */
 .book-now-btn {
-  background: linear-gradient(135deg, #2ecc71, #27ae60);
-  color: white;
+  display: block;
+  margin: 0 auto 55px;
+  background: #22c55e;
+  color: #ffffff;
   border: none;
-  padding: 14px 44px;
-  font-size: 16px;
+  padding: 12px 36px;
+  font-size: 15px;
   font-weight: 600;
-  border-radius: 30px;
+  border-radius: 999px;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(46, 204, 113, 0.35);
-  margin-bottom: 45px;
-  transition: 0.3s ease;
+  transition: 0.25s ease;
 }
 
 .book-now-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(46, 204, 113, 0.45);
+  background: #16a34a;
 }
 
 /* =========================
-   CARDS LAYOUT
+   CARDS
 ========================= */
 .cards {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  max-width: 1100px;
+  margin: 0 auto 70px;
 }
 
 .card {
-  width: 300px;
-  padding: 25px;
-  border-radius: 18px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  text-align: left;
-  position: relative;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 22px 22px 24px;
+  border: 1px solid #e5e7eb;
 }
 
-/* =========================
-   LEFT COLOR STRIP
-========================= */
-.card::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 15px;
-  bottom: 15px;
-  width: 6px;
-  border-radius: 10px;
-}
-
-.card.live::before {
-  background: #2ecc71;
-}
-
-.card.ended::before {
-  background: #e74c3c;
-}
-
-.card.profile::before {
-  background: #3498db;
-}
-
-/* =========================
-   LIVE EVENTS (ALL GREEN)
-========================= */
-.card.live {
-  background: #eafff2;
-  color: #1e8e3e;
-}
-
-.card.live h3,
-.card.live p,
-.card.live strong,
-.card.live .event-title,
-.card.live .event-sub {
-  color: #1e8e3e;
-}
-
-/* =========================
-   ENDED EVENTS (ALL RED)
-========================= */
-.card.ended {
-  background: #ffecec;
-  color: #c0392b;
-}
-
-.card.ended h3,
-.card.ended p,
-.card.ended strong,
-.card.ended .event-title,
-.card.ended .event-sub {
-  color: #c0392b;
-}
-
-/* =========================
-   PROFILE (ALL BLUE)
-========================= */
-.card.profile {
-  background: #eef5ff;
-  color: #1f4fd8;
-}
-
-.card.profile h3,
-.card.profile p,
-.card.profile strong {
-  color: #1f4fd8;
-}
-
-/* =========================
-   CARD TITLES
-========================= */
 .card h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 16px;
   text-align: center;
 }
 
 /* =========================
-   EVENT ITEMS
+   CARD TYPES
+========================= */
+.card.live {
+  border-left: 5px solid #22c55e;
+}
+
+.card.ended {
+  border-left: 5px solid #ef4444;
+}
+
+.card.profile {
+  border-left: 5px solid #3b82f6;
+}
+
+/* =========================
+   EVENTS
 ========================= */
 .event-item {
   margin-bottom: 14px;
 }
 
 .event-title {
-  font-weight: 700;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
 }
 
 .event-sub {
   font-size: 13px;
+  color: #6b7280;
 }
 
 /* =========================
-   MUTED TEXT (EMPTY STATE)
+   PROFILE TEXT
+========================= */
+.card.profile p {
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+/* =========================
+   MUTED
 ========================= */
 .muted {
   font-size: 14px;
-  opacity: 0.75;
+  color: #9ca3af;
+}
+
+/* =========================
+   SECTION HEADING
+========================= */
+.section-heading {
+  max-width: 1100px;
+  margin: 0 auto 18px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* =========================
+   TABLE WRAPPER
+========================= */
+.table-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+/* =========================
+   TABLE
+========================= */
+.event-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.event-table thead {
+  background: #f9fafb;
+}
+
+.event-table th {
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.event-table td {
+  padding: 14px 16px;
+  color: #374151;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.event-table tr:last-child td {
+  border-bottom: none;
+}
+
+.event-table tr:hover {
+  background: #f9fafb;
+}
+
+/* =========================
+   STATUS
+========================= */
+.event-table td:nth-child(5) {
+  font-weight: 600;
+  color: #16a34a;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .user-container {
+    padding: 30px 20px 60px;
+  }
+
+  .welcome-text {
+    font-size: 26px;
+  }
+
+  .section-heading {
+    font-size: 20px;
+  }
+
+  .event-table {
+    font-size: 13px;
+  }
 }
